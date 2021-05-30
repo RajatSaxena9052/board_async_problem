@@ -7,10 +7,11 @@ function callBack3(cardData, listId, callBack) {
             if (dataGot !== undefined) {
                 callBack(dataGot);
             } else {
-                callBack("Id Not Found In boards data");
+                callBack("Id Not Found In cards data");
             }
 
         }, 2 * 1000);
+
     }
 }
 
