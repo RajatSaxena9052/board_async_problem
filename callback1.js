@@ -15,7 +15,6 @@ function callBack1(data, id, callBack) {
             }
 
         }, 2 * 1000);
-
     }
 }
 module.exports = callBack1;
