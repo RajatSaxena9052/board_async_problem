@@ -5,7 +5,7 @@ function callBack2(data, id, callBack) {
             let dataGot = data[id];
 
             if (dataGot === undefined) {
-                callBack("Id Not Found In boards data");
+                callBack("Id Not Found In lists data");
             } else {
                 callBack(dataGot);
             }
