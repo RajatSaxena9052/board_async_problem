@@ -3,30 +3,54 @@ function callback5(boards, lists, cards, id) {
     const callBack2 = require("./callback2");
     const callBack3 = require("./callback3");
 
-    setTimeout(() => {
+    if (typeof callBack1 === "function" && typeof callBack2 === "function" && typeof callBack3 === "function") {
 
-        callBack1(boards, id, (mg) => console.log(mg));
+        if (boards !== undefined && lists !== undefined && cards !== undefined && id !== undefined) {
 
-        callBack2(lists, id, (mg) => {
-            console.log(mg);
+            setTimeout(() => {
 
-            let mindId = mg.find(s => {
-                if (s.name == "Mind") {
-                    return s
-                };
-            }).id;
+                callBack1(boards, id, (boardData) => console.log(boardData));
 
-            let spaceId = mg.find(s => {
-                if (s.name == "Space") {
-                    return s
-                };
-            }).id;
+                callBack2(lists, id, (listData) => {
 
-            callBack3(cards, mindId, (msg) => console.log(msg));
-            callBack3(cards, spaceId, (msg) => console.log(msg));
+                    console.log(listData);
 
-        });
+                    if (Array.isArray(listData) === true) {
 
-    }, 2 * 1000)
+                        let mindId = listData.find(listDataElements => {
+                            if (listDataElements.name == "Mind") {
+                                return listDataElements;
+                            };
+                        });
+
+                        let spaceId = listData.find(listDataElements => {
+                            if (listDataElements.name == "Space") {
+                                return listDataElements;
+                            }
+                        });
+
+                        if (mindId === undefined && spaceId == undefined) {
+                            console.log("Mind and Space Not Found In boardId passed");
+                        }
+                        else {
+                            mindId = mindId.id;
+                            spaceId = spaceId.id;
+                        }
+
+                        callBack3(cards, mindId, (mindData) => console.log("Mind ", mindData));
+
+                        callBack3(cards, spaceId, (spaceData) => console.log("Space ", spaceData));
+
+                    } else {
+                        console.log("Id Not Found In cards data");
+                    }
+
+                });
+
+            }, 2 * 1000);
+
+        }
+    }
+
 }
 module.exports = callback5;
