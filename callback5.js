@@ -23,25 +23,25 @@ function callback5(boards, lists, cards, userInput) {
                         console.error(error);
                     } else {
                         console.log(listData);
-                    }
 
-                    listName.forEach(listNameElements => {
-                        listData.find(listDataElements => {
+                        listName.forEach(listNameElements => {
+                            listData.find(listDataElements => {
 
-                            if (listDataElements.name == listNameElements) {
+                                if (listDataElements.name == listNameElements) {
 
-                                callBack3(cards, listDataElements.id, (error, data) => {
-                                    if (error) {
-                                        console.error(error);
-                                    } else {
-                                        console.log(data);
-                                    }
-                                });
+                                    callBack3(cards, listDataElements.id, (error, data) => {
+                                        if (error) {
+                                            console.error(error);
+                                        } else {
+                                            console.log(listNameElements, " : ", data);
+                                        }
+                                    });
 
-                            }
+                                }
 
+                            });
                         });
-                    });
+                    }
 
                 });
 
