@@ -21,19 +21,20 @@ function callBack6(boards, lists, cards, id) {
                         console.error(error);
                     } else {
                         console.log(listData);
-                    }
 
-                    listData.forEach(listDataElements => {
+                        listData.forEach(listDataElements => {
 
-                        callBack3(cards, listDataElements['id'], (error, cardData) => {
-                            if (error) {
-                                console.error(error);
-                            } else {
-                                console.log(listDataElements.name, " : ", cardData);
-                            }
+                            callBack3(cards, listDataElements['id'], (error, cardData) => {
+                                if (error) {
+                                    console.error(error);
+                                } else {
+                                    console.log(listDataElements.name, " : ", cardData);
+                                }
+                            });
+
                         });
 
-                    });
+                    }
 
                 });
 
