@@ -3,6 +3,12 @@ const cards = require("../data/cards.json");
 
 let listId = "qwsa221";
 
-let callBack = (data) => console.log(data);
+let callBack = (error, data) => {
+    if (error) {
+        console.error(error);
+    } else {
+        console.log(data);
+    }
+}
 
 callBack3(cards, listId, callBack);

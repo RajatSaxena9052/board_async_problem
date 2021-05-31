@@ -8,25 +8,32 @@ function callBack6(boards, lists, cards, id) {
         if (boards !== undefined && lists !== undefined && cards !== undefined && id !== undefined) {
 
             setTimeout(() => {
-                callBack1(boards, id, (boardData) => console.log(boardData));
+                callBack1(boards, id, (error, boardData) => {
+                    if (error) {
+                        console.error(error);
+                    } else {
+                        console.log(boardData);
+                    }
+                });
 
-                callBack2(lists, id, (listData) => {
-                    console.log(listData);
+                callBack2(lists, id, (error, listData) => {
+                    if (error) {
+                        console.error(error);
+                    } else {
+                        console.log(listData);
+                    }
 
-                    if (Array.isArray(listData) === true) {
+                    listData.forEach(listDataElements => {
 
-                        listData.forEach(listDataElements => {
-
-                            callBack3(cards, listDataElements['id'], (cardData) => {
+                        callBack3(cards, listDataElements['id'], (error, cardData) => {
+                            if (error) {
+                                console.error(error);
+                            } else {
                                 console.log(listDataElements.name, " : ", cardData);
-                            });
-
+                            }
                         });
 
-                    }
-                    else {
-                        console.log("Id Not Found In cards data");
-                    }
+                    });
 
                 });
 

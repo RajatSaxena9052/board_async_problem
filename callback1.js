@@ -1,20 +1,21 @@
-function callBack1(data, id, callBack) {
-    if (data !== undefined && id !== undefined && callBack !== undefined) {
+function callBack1(listData, id, callBack) {
+    if (listData !== undefined && id !== undefined && callBack !== undefined) {
 
         setTimeout(() => {
-            let dataGot = data.find((dataElements) => {
+            let dataGot = listData.find((dataElements) => {
                 if (dataElements["id"] == id) {
                     return dataElements;
                 }
             });
 
             if (dataGot === undefined) {
-                callBack("Id Not Found In boards data");
+                callBack(new Error("Data not found in boards file"), undefined);
             } else {
-                callBack(dataGot);
+                callBack(undefined, dataGot);
             }
 
         }, 2 * 1000);
+
     }
 }
 module.exports = callBack1;

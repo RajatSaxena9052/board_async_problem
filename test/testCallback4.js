@@ -4,6 +4,9 @@ const cards = require("../data/cards.json");
 
 const callback4 = require("../callback4");
 
-let boardId = "mcu453ed";
+let userInput = {
+    boardId: "mcu453ed",
+    listName: ["Mind"]
+}
 
-callback4(boards, lists, cards, boardId);
+callback4(boards, lists, cards, userInput);

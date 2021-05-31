@@ -1,13 +1,13 @@
-function callBack2(data, id, callBack) {
-    if (data !== undefined && id !== undefined && callBack !== undefined) {
+function callBack2(listData, boardId, callBack) {
+    if (listData !== undefined && boardId !== undefined && callBack !== undefined) {
 
         setTimeout(() => {
-            let dataGot = data[id];
+            let dataGot = listData[boardId];
 
             if (dataGot === undefined) {
-                callBack("Id Not Found In lists data");
+                callBack(new Error("Id Not Found In lists Data"), undefined);
             } else {
-                callBack(dataGot);
+                callBack(undefined, dataGot);
             }
 
         }, 2 * 1000);

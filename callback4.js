@@ -1,38 +1,46 @@
-function callback4(boards, lists, cards, id) {
+function callback4(boards, lists, cards, userInput) {
     const callBack1 = require("./callback1");
     const callBack2 = require("./callback2");
     const callBack3 = require("./callback3");
 
     if (typeof callBack1 === "function" && typeof callBack2 === "function" && typeof callBack3 === "function") {
 
-        if (boards !== undefined && lists !== undefined && cards !== undefined && id !== undefined) {
+        if (boards !== undefined && lists !== undefined && cards !== undefined && userInput !== undefined) {
 
             setTimeout(() => {
-                callBack1(boards, id, (boardsData) => console.log(boardsData));
+                let { boardId, listName } = userInput;
 
-                callBack2(lists, id, (listData) => {
-
-                    console.log(listData);
-
-                    if (Array.isArray(listData) === true) {
-
-                        let mindId = listData.find(listData => {
-                            if (listData.name == "Mind") {
-                                return listData;
-                            }
-                        });
-
-                        if (mindId === undefined) {
-                            console.log("Id Not Found In cards data");
-                        } else {
-                            mindId = mindId.id;
-                        }
-
-                        callBack3(cards, mindId, (mindData) => console.log(mindData));
-
+                callBack1(boards, boardId, (error, boardsData) => {
+                    if (error) {
+                        console.error(error);
                     } else {
-                        console.log("Id Not Found In cards data");
+                        console.log(boardsData);
                     }
+                });
+
+                callBack2(lists, boardId, (error, listData) => {
+                    if (error) {
+                        console.error(error);
+                    } else {
+                        console.log(listData);
+                    }
+
+                    listName.forEach(listNameElements => {
+                        listData.find(listDataElements => {
+                            if (listDataElements.name == listNameElements) {
+
+                                callBack3(cards, listDataElements.id, (error, data) => {
+                                    if (error) {
+                                        console.error(error);
+                                    } else {
+                                        console.log(data);
+                                    }
+                                });
+
+                            }
+
+                        });
+                    });
 
                 });
 

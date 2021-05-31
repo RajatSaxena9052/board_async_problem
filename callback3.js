@@ -4,10 +4,10 @@ function callBack3(cardData, listId, callBack) {
         setTimeout(() => {
             let dataGot = cardData[listId];
 
-            if (dataGot !== undefined) {
-                callBack(dataGot);
+            if (dataGot === undefined) {
+                callBack(new Error("Id Not Found In cards data"), undefined);
             } else {
-                callBack("Id Not Found In cards data");
+                callBack(undefined, dataGot);
             }
 
         }, 2 * 1000);
